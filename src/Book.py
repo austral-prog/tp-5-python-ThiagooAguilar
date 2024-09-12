@@ -27,14 +27,30 @@ class Book:
 
     # Setters
     def set_available(self, available):
-        pass
+        if available:
+            self.__available = True
+            self.__checkout_num = 0
+            return True
+        else:
+            self.__available = False
+            self.__checkout_num += 1
+            return False
 
     def increment_checkout_num(self):
-        pass
+        new_checkout_num = self.__checkout_num + 1
+        self.__checkout_num = new_checkout_num
+        return True
 
     # Utils
     def __str__(self) -> str:
-        pass
+        return f"ISBN: {self.__isbn}, Title: {self.__title}, Author: {self.__author}"
 
     def __eq__(self, other):
-        pass
+        if isinstance(other, Book):
+            return (self.__isbn == other.__isbn and
+                    self.__title == other.__title and
+                    self.__author == other.__author and
+                    self.__available == other.__available and
+                    self.__checkout_num == other.__checkout_num)
+        return True
+
